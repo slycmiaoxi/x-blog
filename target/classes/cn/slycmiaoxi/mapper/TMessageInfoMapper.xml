@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slycmiaoxi.dao.TMessageInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.slycmiaoxi.entity.TMessageInfo">
+        <id column="message_id" property="messageId"/>
+        <result column="ip_address" property="ipAddress"/>
+        <result column="message_content" property="messageContent"/>
+        <result column="message_state" property="messageState"/>
+        <result column="parent_node" property="parentNode"/>
+        <result column="user_id" property="userId"/>
+        <result column="message_praise" property="messagePraise"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        message_id, ip_address, message_content, message_state, parent_node, user_id,message_praise, gmt_create, gmt_modified, delete_flag
+    </sql>
+
+    <!--获得记录总数 add By slycmiaoxi-->
+    <select id="queryTotal" resultType="Long">
+        select count(*) from t_message_info
+        where delete_flag = 1
+    </select>
+
+    <!--获得分页数据 add By slycmiaoxi-->
+    <select id="queryList" resultType="cn.slycmiaoxi.dto.MessageDto">
+        select
+        tmi.message_id AS messageId,
+        tmi.message_content AS messageContent,
+        tmi.parent_node AS parentNode,
+        tmi.gmt_create AS gmtCreate,
+        tuc.nick_name AS currentName,
+        tup.nick_name AS parentName
+        from t_message_info as tmi
+        LEFT JOIN t_user tuc ON tuc.user_id = tmi.user_id and tuc.delete_flag = 1
+        LEFT JOIN t_user tup ON tup.user_id = tmi.user_id and tup.delete_flag = 1
+        WHERE tmi.delete_flag = 1
+        order by tmi.gmt_create desc
+        <if test="beginIndex!=null and everyPage!=null">
+            limit #{beginIndex},#{everyPage}
+        </if>
+    </select>
+
+</mapper>

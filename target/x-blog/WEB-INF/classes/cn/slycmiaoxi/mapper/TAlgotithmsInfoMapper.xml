@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slycmiaoxi.dao.TAlgotithmsInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.slycmiaoxi.entity.TAlgotithmsInfo">
+        <id column="algotithms_info_id" property="algotithmsInfoId" />
+        <result column="algotithms_type_id" property="algotithmsTypeId" />
+        <result column="algotithms_type_name" property="algotithmsTypeName" />
+        <result column="algotithms_title" property="algotithmsTitle" />
+        <result column="algotithms_description" property="algotithmsDescription" />
+        <result column="input_expression" property="inputExpression" />
+        <result column="output_expression" property="outputExpression" />
+        <result column="sample_input" property="sampleInput" />
+        <result column="sample_out" property="sampleOut" />
+        <result column="author" property="author" />
+        <result column="func_name" property="funcName" />
+        <result column="func_index" property="funcIndex" />
+        <result column="algotithms_code" property="algotithmsCode" />
+        <result column="controller_code" property="controllerCode" />
+        <result column="add_time" property="addTime" />
+        <result column="add_userId" property="addUserid" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_userId" property="updateUserid" />
+        <result column="delete_time" property="deleteTime" />
+        <result column="delete_userId" property="deleteUserid" />
+        <result column="delete_flag" property="deleteFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        algotithms_info_id, algotithms_type_id, algotithms_type_name,algotithms_title, algotithms_description, input_expression, output_expression, sample_input, sample_out, author, func_name, func_index, algotithms_code, add_time, add_userId, update_time, update_userId, delete_time, delete_userId, delete_flag
+    </sql>
+
+</mapper>

@@ -1,0 +1,95 @@
+/* ǰ���ͨ����ص�����,ע��ֻ����ʹ�ö��з�ʽ */
+{
+    /* �ϴ�ͼƬ������ */
+    "imageActionName": "uploadimage", /* ִ���ϴ�ͼƬ��action���� */
+    "imageFieldName": "upfile", /* �ύ��ͼƬ������ */
+    "imageMaxSize": 2048000, /* �ϴ���С���ƣ���λB */
+    "imageAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* �ϴ�ͼƬ��ʽ��ʾ */
+    "imageCompressEnable": true, /* �Ƿ�ѹ��ͼƬ,Ĭ����true */
+    "imageCompressBorder": 1600, /* ͼƬѹ��������� */
+    "imageInsertAlign": "none", /* �����ͼƬ������ʽ */
+    "imageUrlPrefix": "/x-blog", /* ͼƬ����·��ǰ׺ */
+    "imagePathFormat": "/userImages/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
+                                /* {filename} ���滻��ԭ�ļ���,����������Ҫע�������������� */
+                                /* {rand:6} ���滻�������,������������������λ�� */
+                                /* {time} ���滻��ʱ��� */
+                                /* {yyyy} ���滻����λ��� */
+                                /* {yy} ���滻����λ��� */
+                                /* {mm} ���滻����λ�·� */
+                                /* {dd} ���滻����λ���� */
+                                /* {hh} ���滻����λСʱ */
+                                /* {ii} ���滻����λ���� */
+                                /* {ss} ���滻����λ�� */
+                                /* �Ƿ��ַ� \ : * ? " < > | */
+                                /* �����忴�����ĵ�: fex.baidu.com/ueditor/#use-format_upload_filename */ 
+  
+  
+    /* ͿѻͼƬ�ϴ������� */
+    "scrawlActionName": "uploadscrawl", /* ִ���ϴ�Ϳѻ��action���� */
+    "scrawlFieldName": "upfile", /* �ύ��ͼƬ������ */
+    "scrawlPathFormat": "/ueditor/jsp/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
+    "scrawlMaxSize": 2048000, /* �ϴ���С���ƣ���λB */
+    "scrawlUrlPrefix": "", /* ͼƬ����·��ǰ׺ */
+    "scrawlInsertAlign": "none",
+
+    /* ��ͼ�����ϴ� */
+    "snapscreenActionName": "uploadimage", /* ִ���ϴ���ͼ��action���� */
+    "snapscreenPathFormat": "/userImages/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
+    "snapscreenUrlPrefix": "", /* ͼƬ����·��ǰ׺ */
+    "snapscreenInsertAlign": "none", /* �����ͼƬ������ʽ */
+
+    /* ץȡԶ��ͼƬ���� */
+    "catcherLocalDomain": ["127.0.0.1", "localhost", "img.baidu.com"],
+    "catcherActionName": "catchimage", /* ִ��ץȡԶ��ͼƬ��action���� */
+    "catcherFieldName": "source", /* �ύ��ͼƬ�б������ */
+    "catcherPathFormat": "/ueditor/jsp/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
+    "catcherUrlPrefix": "", /* ͼƬ����·��ǰ׺ */
+    "catcherMaxSize": 2048000, /* �ϴ���С���ƣ���λB */
+    "catcherAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* ץȡͼƬ��ʽ��ʾ */
+
+    /* �ϴ���Ƶ���� */
+    "videoActionName": "uploadvideo", /* ִ���ϴ���Ƶ��action���� */
+    "videoFieldName": "upfile", /* �ύ����Ƶ������ */
+    "videoPathFormat": "/static/videos/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
+    "videoUrlPrefix": "/x-blog", /* ��Ƶ����·��ǰ׺ */
+    "videoMaxSize": 102400000, /* �ϴ���С���ƣ���λB��Ĭ��100MB */
+    "videoAllowFiles": [
+        ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
+        ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid"], /* �ϴ���Ƶ��ʽ��ʾ */
+
+    /* �ϴ��ļ����� */
+    "fileActionName": "uploadfile", /* controller��,ִ���ϴ���Ƶ��action���� */
+    "fileFieldName": "upfile", /* �ύ���ļ������� */
+    "filePathFormat": "/ueditor/jsp/upload/file/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
+    "fileUrlPrefix": "", /* �ļ�����·��ǰ׺ */
+    "fileMaxSize": 51200000, /* �ϴ���С���ƣ���λB��Ĭ��50MB */
+    "fileAllowFiles": [
+        ".png", ".jpg", ".jpeg", ".gif", ".bmp",
+        ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
+        ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid",
+        ".rar", ".zip", ".tar", ".gz", ".7z", ".bz2", ".cab", ".iso",
+        ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".md", ".xml"
+    ], /* �ϴ��ļ���ʽ��ʾ */
+
+    /* �г�ָ��Ŀ¼�µ�ͼƬ */
+    "imageManagerActionName": "listimage", /* ִ��ͼƬ�����action���� */
+    "imageManagerListPath": "/ueditor/jsp/upload/image/", /* ָ��Ҫ�г�ͼƬ��Ŀ¼ */
+    "imageManagerListSize": 20, /* ÿ���г��ļ����� */
+    "imageManagerUrlPrefix": "", /* ͼƬ����·��ǰ׺ */
+    "imageManagerInsertAlign": "none", /* �����ͼƬ������ʽ */
+    "imageManagerAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* �г����ļ����� */
+
+    /* �г�ָ��Ŀ¼�µ��ļ� */
+    "fileManagerActionName": "listfile", /* ִ���ļ������action���� */
+    "fileManagerListPath": "/ueditor/jsp/upload/file/", /* ָ��Ҫ�г��ļ���Ŀ¼ */
+    "fileManagerUrlPrefix": "", /* �ļ�����·��ǰ׺ */
+    "fileManagerListSize": 20, /* ÿ���г��ļ����� */
+    "fileManagerAllowFiles": [
+        ".png", ".jpg", ".jpeg", ".gif", ".bmp",
+        ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
+        ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid",
+        ".rar", ".zip", ".tar", ".gz", ".7z", ".bz2", ".cab", ".iso",
+        ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".md", ".xml"
+    ] /* �г����ļ����� */
+
+}

@@ -1,0 +1,137 @@
+* {
+	margin:0;
+	padding:0;
+}
+body  {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	background: #ffffff;
+	color: #ffffff;
+}
+a {
+	color:#226669;
+	text-decoration:underline;
+}
+a:hover {
+	color:#226669;
+	text-decoration:none;
+}
+h1 {
+	color:#226669;
+	font-size:18px;
+	font-weight:bold;
+}
+#container { 
+	width: 1000px; 
+	background:#7db9df url(images/pageBackground.jpg) no-repeat left top; 
+	margin: 0 auto;
+	min-height:625px;
+} 
+#header {
+	height:392px;
+}
+.logo {
+	color:#116316;
+	font-size:48px;
+	padding:0 0 0 360px;
+}
+.author {
+	color:#116316;
+	padding:80px 0 0 630px;
+}
+ul#navlist {
+	margin: 30px 0 0 350px;
+	padding-left: 0;
+	white-space: nowrap;
+}
+#navlist li {
+	display: inline;
+	list-style-type: none;
+}
+#navlist a { 
+	padding: 3px 10px; 
+}
+#navlist a:link, #navlist a:visited {
+	color: #3b819c;
+	font-size:24px;
+	text-decoration: none;
+}
+#navlist a:hover {
+	color: #226669;
+	border-bottom:3px solid #226669;
+	text-decoration: none;
+}
+#navlist #active a {
+	color: #226669;
+	border-bottom:3px solid #226669;
+	text-decoration: none;
+}
+#sidebar1 {
+	float: right; 
+	width: 259px; 
+	margin:0 50px 0 0;
+}
+#sidebar1 ul {
+}
+#sidebar1 li a {
+	color:#ffffff;
+}
+#sidebar1 li {
+	list-style:none;
+	background:url(images/p.png) no-repeat left 2px;
+	padding-left:20px;
+	margin:7px 0;
+}
+.sidebarTop {
+	background:url(images/sidebarTop.png) no-repeat left top;
+	width:259px;
+	height:27px;
+}
+.sidebarCenter {
+	background:url(images/sidebarCenter.png) repeat-y left top;
+	padding:0 20px;
+}
+.sidebarBottom {
+	background:url(images/sidebarBottom.png) no-repeat left top;
+	width:259px;
+	height:27px;
+}
+#mainContent { 
+	margin: 0 329px 0 50px; 
+} 
+.mainTop {
+	background:url(images/contentTop.png) no-repeat left top;
+	width:621px;
+	height:33px;
+}
+.mainCenter {
+	background:url(images/contentCenter.png) repeat-y left top;
+	padding:0 20px;
+}
+.mainBottom {
+	background:url(images/contentBottom.png) no-repeat left top;
+	width:621px;
+	height:33px;
+}
+#footer {
+	background: url(images/footerBackground.png) no-repeat center top;
+	height:41px;
+	padding:12px;
+} 
+#footer p {
+	text-align:center;
+}
+#footer a {
+	color:#ffffff;
+	text-decoration:underline;
+}
+#footer a:hover {
+	color:#ffffff;
+	text-decoration:none;
+}
+.clearfloat { /* this class should be placed on a div or break element and should be the final element before the close of a container that should fully contain a float */
+	clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
+}

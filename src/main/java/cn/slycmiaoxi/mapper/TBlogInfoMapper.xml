@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slycmiaoxi.dao.TBlogInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.slycmiaoxi.entity.TBlogInfo">
+        <id column="blog_id" property="blogId"/>
+        <result column="blog_title" property="blogTitle"/>
+        <result column="blog_content" property="blogContent"/>
+        <result column="author_ip" property="authorIp"/>
+        <result column="visitor_hasread" property="visitorHasread"/>
+        <result column="blog_lable" property="blogLable"/>
+        <result column="user_id" property="userId"/>
+        <result column="blog_item" property="blogItem"/>
+        <result column="img_url" property="imgUrl"/>
+        <result column="blog_state" property="blogState"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        blog_id, blog_title, blog_content, author_ip, visitor_hasread, blog_lable, user_id, blog_item, img_url, blog_state, gmt_create, gmt_modified, delete_flag
+    </sql>
+
+    <sql id="query_blog">
+          tb.delete_flag = 1
+    </sql>
+
+    <!--获得记录总数 add by slycmiaoxi-->
+    <select id="queryTotal" resultType="Long">
+        select count(*) from t_blog_info
+        where delete_flag = 1
+    </select>
+
+    <!--获得分页数据 add by slycmiaoxi-->
+    <select id="queryList" resultType="cn.slycmiaoxi.dto.ArticleDto">
+        select
+        tb.blog_id as blogId,
+        tb.blog_title as blogTitle,
+        tb.blog_content as blogContent,
+        tb.blog_lable as blogLable,
+        tb.blog_state as blogState,
+        tb.gmt_create as gmtCreate,
+        tb.visitor_hasread as visitorHasread,
+        tu.user_id as userId,
+        tu.nick_name as nickName,
+        tu.user_headimg as userHeadimg
+        from t_blog_info as tb
+        join t_user tu on tu.user_id = tb.user_id and tu.delete_flag = 1
+        <where>
+            <include refid="query_blog"></include>
+        </where>
+        order by tb.gmt_create desc
+        <if test="beginIndex!=null and everyPage!=null">
+            limit #{beginIndex},#{everyPage}
+        </if>
+    </select>
+
+    <!--根据帖子类型获得所有帖子集合 add by slycmiaoxi-->
+    <select id="listDtoByState" resultType="cn.slycmiaoxi.dto.ArticleDto">
+        select
+        tb.blog_id as blogId,
+        tb.blog_title as blogTitle,
+        tb.blog_content as blogContent,
+        tb.blog_lable as blogLable,
+        tb.blog_state as blogState,
+        tb.gmt_create as gmtCreate,
+        tb.visitor_hasread as visitorHasread,
+        tu.user_id as userId,
+        tu.nick_name as nickName,
+        tu.user_headimg as userHeadimg
+        from t_blog_info as tb
+        join t_user tu on tu.user_id = tb.user_id and tu.delete_flag = 1
+        where tb.delete_flag = 1 and tb.blog_state in
+        <foreach item="item" collection="list" index="index" open="(" separator="," close=")">#{item}</foreach>
+        order by tb.gmt_create desc
+    </select>
+
+</mapper>

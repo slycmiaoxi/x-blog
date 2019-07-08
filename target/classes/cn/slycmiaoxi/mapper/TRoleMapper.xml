@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slycmiaoxi.dao.TRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.slycmiaoxi.entity.TRole">
+        <id column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <result column="role_description" property="roleDescription"/>
+        <result column="role_available" property="roleAvailable"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        role_id, role_name, role_descriptionD, role_available, gmt_create, gmt_modified, delete_flag
+    </sql>
+
+    <select id="findRolesByNickName" resultMap="BaseResultMap">
+select
+tr.role_id as roleId,
+tr.role_name as roleName
+from t_role tr
+ join t_user_role tur on tur.role_id = tr.role_id
+join t_user tu on tu.user_id = tur.user_id and tu.delete_flag = 1
+where tu.nick_name = #{nickName}  and tu.delete_flag = 1
+    </select>
+
+    <select id="queryTotal" resultType="Long">
+        select count(*) from t_role
+        where delete_flag = 1
+    </select>
+
+    <select id="queryList" resultType="cn.slycmiaoxi.dto.RoleDto">
+        select
+        tu.user_id as userId,
+        tu.nick_name as nickName,
+        tu.gmt_create as gmtCreate,
+        tr.role_id as roleId ,
+        tr.role_description as roleDescription
+        from t_user as tu
+        join t_user_role tur on tur.user_id = tu.user_id
+        join t_role tr on tr.role_id = tur.role_id and tr.delete_flag = 1
+        where tu.delete_flag = 1
+        order by tu.gmt_create
+        <if test="beginIndex!=null and everyPage!=null">
+            limit #{beginIndex},#{everyPage}
+        </if>
+
+    </select>
+
+</mapper>

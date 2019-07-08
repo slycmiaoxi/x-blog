@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slycmiaoxi.dao.TLoginLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.slycmiaoxi.entity.TLoginLog">
+        <id column="pk_id" property="pkId"/>
+        <result column="ip_address" property="ipAddress"/>
+        <result column="visitor_ip" property="visitorIp"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="request_url" property="requestUrl"/>
+        <result column="request_type" property="requestType"/>
+        <result column="user_name" property="userName"/>
+        <result column="logger_name" property="loggerName"/>
+        <result column="logger_type" property="loggerType"/>
+        <result column="request_time" property="requestTime"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ip_address, pk_id, visitor_ip, gmt_create, gmt_modified, request_url, request_type, user_name, logger_name, logger_type, request_time, delete_flag
+    </sql>
+
+    <!--获得记录总数 add by slycmiaoxi-->
+    <select id="queryTotal" resultType="Long">
+        select count(*) from t_login_log
+        where delete_flag = 1
+    </select>
+
+    <!--获得分页数据 add by slycmiaoxi-->
+    <select id="queryList" resultMap="BaseResultMap">
+        select * from t_login_log
+        where delete_flag = 1
+        order by gmt_create desc
+        <if test="beginIndex!=null and everyPage!=null">
+            limit #{beginIndex},#{everyPage}
+        </if>
+    </select>
+
+</mapper>
