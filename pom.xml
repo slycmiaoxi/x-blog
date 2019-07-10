@@ -354,6 +354,18 @@
             <version>7.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.slycmiaoxi.fastdfs</groupId>
+            <artifactId>fastdfs_client</artifactId>
+            <version>1.25</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>x-blog</finalName>

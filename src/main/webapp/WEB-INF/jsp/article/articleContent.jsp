@@ -70,7 +70,11 @@
 							            </div>
 							            <!-- 评论内容 -->
 							            <div class="media-body">
-								            <a href="${pageContext.request.contextPath}/core/v1/tBlogInfo/userBlogAllShow/${1}/${f.userId}" target="_blank">${f.nickName }</a>:
+								            <a href="${pageContext.request.contextPath}/core/v1/tBlogInfo/userBlogAllShow/${1}/${f.userId}" target="_blank">${f.nickName }</a>
+											<br/>
+											<fmt:formatDate value="${f.gmtCreate }"
+															pattern="yyyy-MM-dd mm:ss" />
+											<br/>
 								            <c:out value="${f.floorComment }"></c:out>
 								            <a onclick="floorInput('${c.commentId }','${f.nickName }')">&nbsp;回复&nbsp;</a>
 							            </div>
@@ -164,7 +168,6 @@
 		};
 		 $.post(url, params, function(data) {
 			if(data.code==1){
-				alert('${blogInfo.blogId }');
 			location.href = "${pageContext.request.contextPath}/core/v1/tCommentInfo/show/${1}/${blogInfo.blogId }";
 			}
 			else{

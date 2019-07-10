@@ -22,7 +22,7 @@ public class LockUserFilter extends AccessControlFilter {
     @Autowired
     private ITUserService itUserService;
     
-    private String loginUrl = "/500.jsp";
+    private String loginUrl = "/unauthorized.jsp";
     
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)

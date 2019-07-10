@@ -47,7 +47,7 @@
         tf.comment_id as commentId,
         tf.blog_id as blogId,
         tf.floor_comment as floorComment,
-        tf.gmt_modified as gmtCreate,
+        tf.gmt_create as gmtCreate,
         tu.user_id as userId,
         tu.nick_name as nickName,
         tu.user_headimg as imgUrl

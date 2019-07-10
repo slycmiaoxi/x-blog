@@ -46,16 +46,16 @@
                                         当前共有  ${totalCurrentRecord} 条记录--
                                        目前是第${page.currentPage}/${page.totalPage}页 
                                         <c:if test="${page.hasPrePage}">
-													<a href="${pageContext.request.contextPath}/tbloginfo/showUserBlogView/${1}/${fkUid}" >首页</a>
-													<a href="${pageContext.request.contextPath}/tbloginfo/showUserBlogView/${page.currentPage -1}/${fkUid}" >上一页</a>
+													<a href="${pageContext.request.contextPath}/core/v1/tBlogInfo/userBlogAllShow/${1}/${fkUid}" >首页</a>
+													<a href="${pageContext.request.contextPath}/core/v1/tBlogInfo/userBlogAllShow/${page.currentPage -1}/${fkUid}" >上一页</a>
 												</c:if>
 												<c:if test="!${page.hasPrePage}">												
 													首页
 						                        	上一页
 											   </c:if>										
 												<c:if test="${page.hasNextPage}">
-													<a href="${pageContext.request.contextPath}/tbloginfo/showUserBlogView/${page.currentPage + 1}/${fkUid}" >下一页</a>
-													<a href="${pageContext.request.contextPath}/tbloginfo/showUserBlogView/${page.totalPage}/${fkUid}" >尾页</a>			
+													<a href="${pageContext.request.contextPath}/core/v1/tBlogInfo/userBlogAllShow/${page.currentPage + 1}/${userId}" >下一页</a>
+													<a href="${pageContext.request.contextPath}/core/v1/tBlogInfo/userBlogAllShow/${page.totalPage}/${userId}" >尾页</a>
 												</c:if>
 												<c:if test="!${page.hasNextPage}">
 													下一页
@@ -63,19 +63,7 @@
 												</c:if>
                                                                                   </ul>
 				</div>
-			
-					<c:choose>
-					<c:when test="${!empty currentUser }">
-						<center>
-							<h3>您已登陆！</h3>
-						</center>
-					</c:when>
-					<c:otherwise>
-						<center>
-							<h3>登陆后才可进行发帖！</h3>
-						</center>
-					</c:otherwise>
-				</c:choose>
+
 					
 
 				<%@include file="common/foot.jsp"%>
@@ -96,7 +84,7 @@
 									<img alt="${currentUser.nickName }" src="${currentUser.userHeadimg }" class="img-circle" style="width: 224px;height: 224px;">
 								</a>
 								<br><br>用户名：
-								${currentUser.nickname}
+								${currentUser.nickName}
 								<br><a href="<c:url value="/core/v1/tUser/logout"/>">安全退出</a>
 							</c:otherwise>
 						</c:choose>

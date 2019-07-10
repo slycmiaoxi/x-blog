@@ -2,6 +2,7 @@ package cn.slycmiaoxi.controller;
 
 import java.util.*;
 
+import cn.slycmiaoxi.utils.JsoupUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -210,7 +211,7 @@ public class TBlogInfoController {
         
         try {
             // 2 .添加帖子
-            TBlogInfo blogInfo = generatorBlogInfo(blogTitle, blogLable, blogContent, user.getUserId());
+            TBlogInfo blogInfo = generatorBlogInfo(blogTitle, blogLable, JsoupUtil.clean(blogContent), user.getUserId());
             itBlogInfoService.insert(blogInfo);
             
             // 3.添加到es库

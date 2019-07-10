@@ -45,7 +45,7 @@ public class PageUtil {
             totalPage = 1;
         }
         else {
-            totalPage = totalCount / everyPage + 1;
+            totalPage = totalCount / everyPage ;
         }
         return totalPage;
     }
