@@ -27,21 +27,19 @@
 4.  配置和修改相关配置文件或者全局变量（后面有时间将详细优化后列出来)
 
 #### 项目部分截图(部分是旧图)
-1.算法建模
+1.  算法建模
 ![Alt text](/img/3.jpg)
 ![Alt text](/img/4.jpg)
 ![Alt text](/img/5.jpg)
-2.在线java编程
+2.  在线java编程
 ![Alt text](/img/6.jpg)
-3.留言版
+3.  留言版
 ![Alt text](/img/9.jpg)
-4.全部帖子
+4.  全部帖子
 ![Alt text](/img/10.jpg)
-5.lucene检索帖子内容
-![Alt text](/img/11.jpg)
-6.帖子详情页
+6.  帖子详情页
 ![Alt text](/img/12.jpg)
-7.在线人数与强制踢人
+7.  在线人数与强制踢人
 ![Alt text](/img/18.jpg)
 
 #### 说明
