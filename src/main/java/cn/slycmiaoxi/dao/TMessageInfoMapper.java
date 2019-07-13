@@ -37,4 +37,13 @@ public interface TMessageInfoMapper extends BaseMapper<TMessageInfo> {
      * @since 2019-06-26
      */
     Long queryTotal(Map<String, Object> map);
+
+    /**
+     * 删除留言
+     *
+     * @param map 存放参数
+     * @author slycmiaoxi
+     * @since 2019-07-06
+     */
+    void delete(Map<String, Object> map);
 }

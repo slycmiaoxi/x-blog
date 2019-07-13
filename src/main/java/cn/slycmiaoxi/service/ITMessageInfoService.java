@@ -37,4 +37,13 @@ public interface ITMessageInfoService extends IService<TMessageInfo> {
      * @since 2019-07-01
      */
     PageModal queryListbyPage(Page page, Map<String, Object> map);
+    
+    /**
+     * 删除留言
+     *
+     * @param map 存放参数
+     * @author slycmiaoxi
+     * @since 2019-07-06
+     */
+    void delete(Map<String, Object> map);
 }

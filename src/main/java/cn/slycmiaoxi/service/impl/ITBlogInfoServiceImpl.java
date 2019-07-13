@@ -74,7 +74,7 @@ public class ITBlogInfoServiceImpl extends ServiceImpl<TBlogInfoMapper, TBlogInf
         if (CollectionUtils.isEmpty(states)) {
             return null;
         }
-        
+
         List<ArticleDto> dtos = tBlogInfoMapper.listDtoByState(states);
         dtos.stream().filter(x -> x != null).forEach(dto -> {
             dto.setBlogId(CodecUtils.encodeData(String.valueOf(dto.getBlogId())));

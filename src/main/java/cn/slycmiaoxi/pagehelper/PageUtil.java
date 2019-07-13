@@ -45,6 +45,9 @@ public class PageUtil {
             totalPage = 1;
         }
         else {
+            if (totalCount % 2 == 1) {
+                totalCount =totalCount + 1;
+            }
             totalPage = totalCount / everyPage ;
         }
         return totalPage;

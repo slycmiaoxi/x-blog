@@ -46,4 +46,11 @@
         </if>
     </select>
 
+    <!--删除评论 add by slycmiaoxi-->
+    <update id="delete">
+        update t_message_info
+        set delete_flag = 0,gmt_modified = now()
+        WHERE delete_flag = 1 and (message_id =#{messageId} OR parent_node = #{messageId})
+    </update>
+
 </mapper>

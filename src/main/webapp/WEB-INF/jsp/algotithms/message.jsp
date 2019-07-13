@@ -23,12 +23,17 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/Message/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/Message/css/comment.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/simpleAlert.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myAlert.min.css">
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/static/Message/js/jquery-1.12.0.min.js"></script>
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/static/Message/js/jquery.flexText.js"></script>
-    <script type="text/javascript">
 
+    <script src="${pageContext.request.contextPath}/js/simpleAlert.js"></script>
+    <script src="${pageContext.request.contextPath}/js/myAlert.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
         /* 初始化留言 */
         $(function () {
             $('.content').flexText();
@@ -45,7 +50,7 @@
                         $.each(domList, function (index, domEle) {
                             var contents = domEle.messageContent;
                             //动态创建评论模块
-                            oHtml = '<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath}/static/Message/images/user_icon.png" alt=""></div> <div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"> <a href="#" class="comment-size-name">' + domEle.currentName + ' : </a> <input hidden="hidden" value="' + domEle.messageId + '" id="parentId"/>  <span class="my-pl-con">&nbsp;' + contents + '</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">' + domEle.time + '</span> <div class="date-dz-right pull-right comment-pl-block"> <a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
+                            oHtml = '<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="${pageContext.request.contextPath}/static/Message/images/user_icon.png" alt=""></div> <div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"> <a href="#" class="comment-size-name">' + domEle.currentName + ' : </a> <input hidden="hidden" value="' + domEle.messageId + '" id="parentId"/>  <span class="my-pl-con">&nbsp;' + contents + '</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">' + domEle.time + '</span> <div class="date-dz-right pull-right comment-pl-block"> <a href="javascript:;" class="removeBlock">删除 <i class="z-name" hidden="hidden">' + domEle.currentName + '</i><i class="z-id" hidden="hidden">' + domEle.messageId + '</i></a>  <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block hf-con-block pull-left">回复</a>  </div> </div><div class="hf-list-con"></div></div> </div>';
                             var child = domEle.child;
 
                             if (contents.replace(/(^\s*)|(\s*$)/g, "") != '') {
@@ -55,7 +60,7 @@
                                 if (child != null) {
                                     //加载子模块
                                     for (var i = 0; i < child.length; i++) {
-                                        var oHtml1 = '<div class="all-pl-con"><div class="pl-text hfpl-text clearfix"><a href="#" class="comment-size-name">' + child[i].currentName + ': </a><span class="my-pl-con">' + child[i].messageContent + '</span></div><div class="date-dz"> <span class="date-dz-left pull-left comment-time">' + child[i].time + '</span> <div class="date-dz-right pull-right comment-pl-block"> <a href="javascript:;" class="removeBlock">删除</a>  <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div></div>';
+                                        var oHtml1 = '<div class="all-pl-con"><div class="pl-text hfpl-text clearfix"><a href="#" class="comment-size-name">' + child[i].currentName + ': </a><span class="my-pl-con">' + child[i].messageContent + '</span></div><div class="date-dz"> <span class="date-dz-left pull-left comment-time">' + child[i].time + '</span> <div class="date-dz-right pull-right comment-pl-block"> <a href="javascript:;" class="removeBlock">删除<i class="z-name" hidden="hidden">' + child[i].currentName + '</i><i class="z-id" hidden="hidden">' + child[i].messageId + '</i></a>  <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a>  </div> </div></div>';
                                         $(".reviewArea").next().children().first().find('.comment-show-con-list').find('.hf-list-con').css('display', 'block').prepend(oHtml1);
                                     }
                                 }
@@ -234,6 +239,75 @@
             });
         }
     });
+</script>
+<!--删除评论块-->
+<script type="text/javascript">
+    function removeBlock(e) {
+        console.log(e);
+        var oT = $(".removeBlock").parents('.date-dz-right').parents('.date-dz').parents('.all-pl-con');
+        if (oT.siblings('.all-pl-con').length >= 1) {
+            oT.remove();
+        } else {
+            $(".removeBlock").parents('.date-dz-right').parents('.date-dz').parents('.all-pl-con').parents('.hf-list-con').css('display', 'none')
+            oT.remove();
+        }
+        $(".removeBlock").parents('.date-dz-right').parents('.date-dz').parents('.comment-show-con-list').parents('.comment-show-con').remove();
+    }
+
+    $('.commentAll').on('click', '.removeBlock', function (e) {
+        var removeName = $(this).find('.z-name').html();
+        var nickName = $("#currentUserName").val();
+        var removeId = $(this).find('.z-id').html();
+
+        if ('' == nickName) {
+            alert("对不起，您未登录不能做任何操作!");
+            return false;
+        }
+        if (removeName != nickName) {
+            alert("对不起，你不能删除别人的留言!");
+            return false;
+        }
+
+        var dblChoseAlert = simpleAlert({
+            "title": "是否真的要删除该留言吗?",
+            "content": "请按确定进行删除!",
+            "buttons": {
+                "确定": function () {
+                    dblChoseAlert.close();
+                    $.ajax({
+                        cache: false,
+                        type: "DELETE",
+                        url: '${pageContext.request.contextPath}/core/v1/tMessageInfo/delete',
+                        data: {
+                            "messageid": removeId
+                        },
+                        dataType: "json",
+                        async: false,
+                        success: function (data) {
+                            if (data.code == 1) {
+                                alert("删除成功!");
+                            }
+                            else {
+                                alert("删除失败!");
+                                return false;
+                            }
+                            location.reload().fadeIn('fast');
+                        },
+                        error: function (xhr, textStatus) {
+                            alert('删除异常');
+                        }
+                    });
+
+
+                },
+                "取消": function () {
+                    dblChoseAlert.close();
+                    return false;
+                }
+            }
+        });
+
+    })
 </script>
 
 </body>

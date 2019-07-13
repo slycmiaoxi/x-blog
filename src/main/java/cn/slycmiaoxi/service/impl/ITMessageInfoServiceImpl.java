@@ -88,4 +88,9 @@ public class ITMessageInfoServiceImpl extends ServiceImpl<TMessageInfoMapper, TM
         pg.setList(parent);
         return pg;
     }
+
+    @Override
+    public void delete(Map<String, Object> map) {
+        tMessageInfoMapper.delete(map);
+    }
 }

@@ -2,9 +2,12 @@ package cn.slycmiaoxi.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cn.slycmiaoxi.object.ResultMap;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -142,6 +145,27 @@ public class TMessageInfoController {
         }
         catch (Exception e) {
             log.error("message add reply error !", e);
+            return R.fail();
+        }
+        return R.ok();
+    }
+
+    /**
+     * 删除留言
+     *
+     * @param messageId 留言主键
+     * @return 删除结果
+     * @author slycmiaoxi
+     * @since 2019-07-06
+     */
+    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    @ResponseBody
+    public R delete( @RequestBody String messageid) {
+        try {
+            String[] messageId = messageid.split("=");
+            itMessageInfoService.delete(new ResultMap("messageId", messageId[1]).toMap());
+        }
+        catch (NumberFormatException e) {
             return R.fail();
         }
         return R.ok();

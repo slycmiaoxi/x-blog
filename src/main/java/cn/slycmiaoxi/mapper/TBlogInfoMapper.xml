@@ -46,7 +46,7 @@
         tb.visitor_hasread as visitorHasread,
         tu.user_id as userId,
         tu.nick_name as nickName,
-        tu.user_headimg as userHeadimg
+        tu.user_headimg as imgUrl
         from t_blog_info as tb
         join t_user tu on tu.user_id = tb.user_id and tu.delete_flag = 1
         <where>
