@@ -139,6 +139,7 @@
                 <!--留言板-->
                 /core/v1/tMessageInfo/addTop=authc
                 /core/v1/tMessageInfo/addReply=authc
+                /core/v1/tMessageInfo/delete=authc
                 <!--   后台管理员界面权限 -->
                 /core/v1/userOnline/**=authc,roles[admin]
                 /core/v1/tLoginLog/**=authc,roles[admin]
