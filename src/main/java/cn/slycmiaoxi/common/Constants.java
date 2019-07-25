@@ -64,7 +64,7 @@ public class Constants {
     /**
      * fastDfs图片映射地址
      */
-    public static final String BASE_URL = "http://fastdfs.luyiyi.cn//";
+    public static final String BASE_URL = "";
 
     /**
      *
