@@ -2,6 +2,10 @@ package cn.slycmiaoxi.core.algotithms.base;
 
 import java.util.List;
 
+import cn.slycmiaoxi.object.ArCompress;
+import cn.slycmiaoxi.object.Compress;
+import cn.slycmiaoxi.object.Decompress;
+
 /**
  * <p>
  * 数据结构
@@ -105,4 +109,42 @@ public interface DataStructService {
      */
     int binarySearch(int[] a, int target);
     
+    /**
+     * 归并排序
+     * 
+     * @param b
+     * @param a
+     * @param i
+     * @param j
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/19
+     */
+    void mSort(int[] b, int[] a, int i, int j);
+    
+    /**
+     * 哈夫曼树之压缩
+     * 
+     * @return 压缩后的数据对象
+     * @author slycmiaoxi
+     * @since 2019-06-30
+     */
+    Compress getCompress();
+    
+    /**
+     * 哈夫曼树之含有解密信息的压缩
+     * 
+     * @return 压缩后的数据对象
+     * @author slycmiaoxi
+     * @since 2019-06-30
+     */
+    ArCompress getArCompress();
+    
+    /**
+     * 哈夫曼树之解压
+     *
+     * @return 压缩后的数据对象
+     * @author slycmiaoxi
+     * @since 2019-06-30
+     */
+    Decompress getDecompress();
 }

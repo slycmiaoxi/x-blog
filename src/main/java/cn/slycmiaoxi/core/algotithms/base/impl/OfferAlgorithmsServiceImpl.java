@@ -9,7 +9,6 @@ import cn.slycmiaoxi.core.algotithms.base.OfferAlgorithmsService;
 import cn.slycmiaoxi.object.ListNode;
 import cn.slycmiaoxi.object.TreeNode;
 
-
 /**
  * <p>
  * 剑指Offer实现类
@@ -26,6 +25,10 @@ public class OfferAlgorithmsServiceImpl implements OfferAlgorithmsService {
     @Override
     public void clean() {
         tailToHeadList.clear();
+        stack1.clear();
+        stack2.clear();
+        m_data.clear();
+        m_min.clear();
     }
     
     @Override
@@ -458,7 +461,7 @@ public class OfferAlgorithmsServiceImpl implements OfferAlgorithmsService {
         for (char c : ch) {
             sb.append(c);
         }
-
+        
         return sb.toString();
         
     }
@@ -476,6 +479,539 @@ public class OfferAlgorithmsServiceImpl implements OfferAlgorithmsService {
             k++;
         }
         return list;
+    }
+    
+    @Override
+    public ListNode ReverseList(ListNode head) {
+        ListNode phead = null;
+        ListNode currentNode = head;
+        ListNode pre = null;
+        while (currentNode != null) {
+            ListNode nextNode = currentNode.next;
+            if (nextNode == null) {
+                phead = currentNode;
+            }
+            currentNode.next = pre;
+            pre = currentNode;
+            currentNode = nextNode;
+        }
+        return phead;
+    }
+    
+    @Override
+    public boolean HasSubtree(TreeNode<String> root1, TreeNode<String> root2) {
+        boolean flag = false;
+        if (root1 != null && root2 != null) {
+            if (root1.value.equals(root2.value)) {
+                flag = nodesIsEquals(root1, root2);
+            }
+            if (!flag) {
+                flag = HasSubtree(root1.left, root2);
+            }
+            if (!flag) {
+                flag = HasSubtree(root1.right, root2);
+            }
+        }
+        return flag;
+    }
+    
+    @Override
+    public boolean VerifySquenceOfBST(int[] sequence) {
+        int count = sequence.length;
+        if (count == 0)
+            return false;
+        return isRight(sequence, 0, count - 1);
+        
+    }
+    
+    @Override
+    public ArrayList<String> Permutation(String str) {
+        ArrayList<String> list = new ArrayList<String>();
+        if (str == null || str.length() < 0)
+            return list;
+        list = permitution(list, str.toCharArray(), 0, str.length());
+        Collections.sort(list);
+        return list;
+    }
+    
+    Stack<Integer> stack1 = new Stack<Integer>();
+    
+    Stack<Integer> stack2 = new Stack<Integer>();
+    
+    @Override
+    public void push(int node) {
+        stack1.push(node);
+    }
+    
+    @Override
+    public void pushs(int node) {
+        m_data.push(node);
+        if (m_min.size() == 0 || node < m_min.peek())
+            m_min.push(node);
+        else {
+            m_min.push(m_min.peek());
+        }
+    }
+    
+    Stack<Integer> m_data = new Stack<Integer>();
+    
+    Stack<Integer> m_min = new Stack<Integer>();
+    
+    @Override
+    public int pop() {
+        if (stack2.isEmpty()) {
+            while (!stack1.isEmpty()) {
+                stack2.push(stack1.pop());
+            }
+        }
+        
+        return stack2.pop();
+    }
+    
+    @Override
+    public int min() {
+        if (m_data.size() > 0 && m_min.size() > 0) {
+            return m_min.pop();
+        }
+        return 0;
+    }
+    
+    @Override
+    public int minNumberInRotateArray(int[] array) {
+        if (array == null || array.length <= 0)
+            return 0;
+        int low = 0;
+        int high = array.length - 1;
+        int mid = low;
+        while (array[low] >= array[high]) {
+            if (high - low == 1) {
+                return array[high];
+            }
+            mid = (high + low) / 2;
+            if (array[low] == array[high] && array[mid] == array[high]) {
+                
+            }
+            if (array[mid] >= array[low]) {
+                low = mid;
+            }
+            else if (array[mid] <= array[high]) {
+                high = mid;
+            }
+        }
+        return array[mid];
+    }
+    
+    @Override
+    public int GetUglyNumber_Solution(int index) {
+        if (index <= 0) {
+            return 0;
+        }
+        int[] ugly = new int[index];
+        ugly[0] = 1;
+        int count = 1;
+        int num2 = 0;
+        int num3 = 0;
+        int num5 = 0;
+        while (count < index) {
+            int min = IsUglyNumber(ugly[num2] * 2, ugly[num3] * 3, ugly[num5] * 5);
+            ugly[count] = min;
+            count++;
+            if (min == ugly[num2] * 2) {
+                num2++;
+            }
+            if (min == ugly[num3] * 3) {
+                num3++;
+            }
+            if (min == ugly[num5] * 5) {
+                num5++;
+            }
+        }
+        return ugly[index - 1];
+    }
+    
+    @Override
+    public boolean Find(int target, int[][] array) {
+        boolean found = false;
+        int rows = array.length;
+        int colums = array[0].length;
+        int row = 0;
+        int colum = colums - 1;
+        while (row < rows && colum >= 0) {
+            if (array[row][colum] == target) {
+                found = true;
+                return found;
+            }
+            else if (array[row][colum] < target) {
+                row++;
+            }
+            else {
+                colum--;
+            }
+        }
+        return found;
+    }
+    
+    @Override
+    public int Fibonacci(int n) {
+        int result = 0;
+        int preOne = 0;
+        int preTwo = 1;
+        if (n == 0) {
+            return preOne;
+        }
+        if (n == 1) {
+            return preTwo;
+        }
+        for (int i = 1; i <= n; i++) {
+            preOne = preTwo;
+            preTwo = result;
+            result = preOne + preTwo;
+        }
+        return result;
+    }
+    
+    @Override
+    public int JumpFloor(int target) {
+        int[] r = {0, 1, 2};
+        if (target < 0) {
+            return -1;
+        }
+        if (target <= 2 && target >= 0) {
+            return r[target];
+        }
+        int one = 1;
+        int two = 2;
+        int result = 0;
+        for (int i = 3; i <= target; i++) {
+            result = one + two;
+            one = two;
+            two = result;
+        }
+        return result;
+    }
+    
+    @Override
+    public int JumpFloorII(int target) {
+        if (target <= 0) {
+            return -1;
+        }
+        if (target == 1) {
+            return 1;
+        }
+        return 2 * JumpFloorII(target - 1);
+    }
+    
+    @Override
+    public int RectCover(int target) {
+        if (target <= 0) {
+            return 0;
+        }
+        if (target == 1 || target == 2) {
+            return target;
+        }
+        return RectCover(target - 1) + RectCover(target - 2);
+    }
+    
+    @Override
+    public String ReverseSentence(String str) {
+        if (str == null) {
+            return null;
+        }
+        if (str.trim().equals("")) {
+            return str;
+        }
+        String[] s = str.split(" ");
+        StringBuffer sb = new StringBuffer(s.length);
+        for (int i = s.length - 1; i >= 0; i--) {
+            if (i != 0)
+                sb.append(s[i] + " ");
+            else
+                sb.append(s[i]);
+        }
+        return sb.toString();
+    }
+    
+    @Override
+    public boolean isContinuous(int[] numbers) {
+        if (numbers == null)
+            return false;
+        Arrays.sort(numbers);
+        int i = 0, zero = 0;
+        for (; i < numbers.length && numbers[i] == 0; i++)
+            zero++;
+        for (; i < numbers.length - 1 && zero >= 0; i++) {
+            if (numbers[i] == numbers[i + 1])
+                return false;
+            if (numbers[i] + 1 + zero >= numbers[i + 1]) {
+                zero -= numbers[i + 1] - numbers[i] - 1;
+            }
+            else
+                return false;
+        }
+        if (i == numbers.length - 1)
+            return true;
+        else
+            return false;
+    }
+    
+    @Override
+    public int Add(int num1, int num2) {
+        int sum, carry;
+        do {
+            sum = num1 ^ num2;
+            carry = (num1 & num2) << 1;
+            num1 = sum;
+            num2 = carry;
+        } while (num2 != 0);
+        return num1;
+    }
+    
+    @Override
+    public boolean match(char[] str, char[] pattern) {
+        if (str == null || pattern == null)
+            return false;
+        return matchRegCore(str, 0, str.length, pattern, 0, pattern.length);
+    }
+    
+    @Override
+    public ArrayList<ArrayList<Integer>> FindContinuousSequence(int sum) {
+        ArrayList<ArrayList<Integer>> sqList = new ArrayList<ArrayList<Integer>>();
+        if (sum < 3)
+            return sqList;
+        int small = 1;
+        int big = 2;
+        int curSum = small + big;
+        int middle = (1 + sum) / 2;
+        while (small < middle) {
+            ArrayList<Integer> sq = new ArrayList<Integer>();
+            if (curSum == sum) {
+                for (int i = small; i <= big; i++)
+                    sq.add(i);
+            }
+            while (curSum > sum && small < middle) {
+                curSum -= small;
+                small++;
+                if (curSum == sum) {
+                    for (int i = small; i <= big; i++)
+                        sq.add(i);
+                }
+            }
+            
+            if (sq.size() > 0)
+                sqList.add(sq);
+            big++;
+            curSum += big;
+        }
+        return sqList;
+    }
+    
+    @Override
+    public ArrayList<Integer> FindNumbersWithSum(int[] array, int sum) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        ArrayList<Integer> lists = new ArrayList<Integer>();
+        if (array == null || sum <= 0)
+            return list;
+        int start = 0;
+        int end = array.length - 1;
+        int curSum = array[start] + array[end];
+        while (start < end) {
+            if (curSum == sum) {
+                list.add(array[start]);
+                list.add(array[end]);
+            }
+            while (curSum > sum) {
+                end--;
+                curSum = array[start] + array[end];
+                if (curSum == sum) {
+                    list.add(array[start]);
+                    list.add(array[end]);
+                }
+            }
+            start++;
+            curSum = array[start] + array[end];
+        }
+        if (list.size() == 0)
+            return list;
+        lists.add(list.get(0));
+        lists.add(list.get(1));
+        return lists;
+    }
+    
+    @Override
+    public int GetNumberOfK(int[] array, int k) {
+        int length = array.length;
+        if (length == 0) {
+            return 0;
+        }
+        int firstK = getFirstK(array, k, 0, length - 1);
+        int lastK = getLastK(array, k, 0, length - 1);
+        if (firstK != -1 && lastK != -1) {
+            return lastK - firstK + 1;
+        }
+        return 0;
+    }
+    
+    @Override
+    public boolean isNumeric(char[] str) {
+        if (str == null || str.length == 0)
+            return false;
+        int index = 0;
+        int length = str.length;
+        while (index < length && str[index] == ' ')
+            index++;
+        if (index >= length)
+            return false;
+        while (str[length - 1] == ' ')
+            length--;
+        if (str[index] == '+' || str[index] == '-')
+            index++;
+        if (index >= length)
+            return false;
+        
+        while (index < length && str[index] >= '0' && str[index] <= '9')
+            index++;
+        if (index == length)
+            return true;
+        int index2 = index;
+        
+        if (str[index] == '.') {
+            index++;
+            if (index == length)
+                return true;
+            index2 = index;
+            while (index < length && str[index] >= '0' && str[index] <= '9')
+                index++;
+            if (index == index2)
+                return false;
+            if (index == length)
+                return true;
+        }
+        
+        if (str[index] == 'e' || str[index] == 'E') {
+            index++;
+            if (index == length)
+                return false;
+            if (str[index] == '+' || str[index] == '-')
+                index++;
+            index2 = index;
+            while (index < length && str[index] >= '0' && str[index] <= '9')
+                index++;
+            if (index == index2)
+                return false;
+            if (index == length)
+                return true;
+        }
+        return false;
+    }
+    
+    private int getFirstK(int array[], int k, int start, int end) {
+        if (start > end)
+            return -1;
+        int mid = (start + end) >> 1;
+        if (array[mid] > k)
+            return getFirstK(array, k, start, mid - 1);
+        else if (array[mid] < k)
+            return getFirstK(array, k, mid + 1, end);
+        else if (mid - 1 >= 0 && array[mid - 1] == k) {
+            return getFirstK(array, k, start, mid - 1);
+        }
+        else
+            return mid;
+    }
+    
+    private int getLastK(int array[], int k, int start, int end) {
+        int length = array.length;
+        int mid = (start + end) >> 1;
+        while (start <= end) {
+            if (array[mid] < k)
+                start = mid + 1;
+            else if (array[mid] > k)
+                end = mid - 1;
+            else if (mid + 1 < length && array[mid + 1] == k) {
+                start = mid + 1;
+            }
+            else
+                return mid;
+            mid = (start + end) >> 1;
+        }
+        return -1;
+    }
+    
+    private boolean matchRegCore(char[] str, int i, int length1, char[] pattern, int j, int length2) {
+        if (i == length1 && j == length2) {
+            if (j == length2 || pattern[j] == '*')
+                return true;
+            else
+                return false;
+        }
+        if (i != length1 && j == length2)
+            return false;
+        if (j + 1 < length2 && pattern[j + 1] == '*') {
+            if (i < length1 && (pattern[j] == str[i] || pattern[j] == '.')) {
+                return matchRegCore(str, i + 1, length1, pattern, j, length2)
+                    || matchRegCore(str, i + 1, length1, pattern, j + 2, length2)
+                    || matchRegCore(str, i, length1, pattern, j + 2, length2);
+            }
+            else {
+                return matchRegCore(str, i, length1, pattern, j + 2, length2);
+            }
+        }
+        if (i < length1 && (str[i] == pattern[j] || pattern[j] == '.')) {
+            return matchRegCore(str, i + 1, length1, pattern, j + 1, length2);
+        }
+        return false;
+    }
+    
+    private int IsUglyNumber(int num2, int num3, int num5) {
+        int min = num2 < num3 ? num2 : num3;
+        return min < num5 ? min : num5;
+    }
+    
+    private ArrayList<String> permitution(ArrayList<String> list, char[] str, int begin, int length) {
+        if (begin == length - 1) {
+            if (!list.contains(str)) {
+                list.add(String.valueOf(str));
+            }
+        }
+        else {
+            for (int i = begin; i < length; i++) {
+                if (i == begin || str[i] != str[begin]) {
+                    swap(str, begin, i);
+                    permitution(list, str, begin + 1, length);
+                    swap(str, begin, i);
+                }
+            }
+        }
+        return list;
+    }
+    
+    public void swap(char[] str, int begin, int i) {
+        char temp = str[i];
+        str[i] = str[begin];
+        str[begin] = temp;
+    }
+    
+    public boolean isRight(int[] sequence, int start, int end) {
+        if (start >= end)
+            return true;
+        int i = end - 1;
+        while (sequence[i] > sequence[end] && i > start)
+            i--;
+        for (int j = start; j < i; j++) {
+            if (sequence[j] > sequence[end])
+                return false;
+        }
+        return isRight(sequence, start, i) && isRight(sequence, i + 1, end - 1);
+    }
+    
+    private boolean nodesIsEquals(TreeNode root1, TreeNode root2) {
+        if (root2 == null)
+            return true;
+        if (root1 == null)
+            return false;
+        if (!root1.value.equals(root2.value))
+            return false;
+        return nodesIsEquals(root1.left, root2.left) && nodesIsEquals(root1.right, root2.right);
     }
     
     private int maxInWindow(int[] num, int k, int size) {

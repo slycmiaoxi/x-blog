@@ -602,6 +602,536 @@ public class OfferAlgorithmsController {
         return JSON.toJSONString(sb.toString());
     }
     
+    /**
+     * 反转链表
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("reverseList")
+    @ResponseBody
+    public String ReverseList(String yourInput) {
+        if (!checkInput(yourInput, "(\\w,)+\\w$")) {
+            return JSON.toJSONString("error");
+        }
+        
+        ListNode<String> head = createListNodeHead(yourInput);
+        ListNode<String> node = offerAlgorithmsService.ReverseList(head);
+        List<String> list = new ArrayList<String>();
+        while (node != null) {
+            list.add(node.val);
+            node = node.next;
+        }
+        return JSON.toJSONString(getStrBySplitList((ArrayList<String>)list));
+    }
+    
+    /**
+     * 树的子结构
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("hasSubtree")
+    @ResponseBody
+    public String HasSubtree(String yourInput) {
+        String[] str = yourInput.split(",");
+        String[] str1 = str[0].split(" ");
+        String[] str2 = str[1].split(" ");
+        boolean isRight = str[0].matches("(\\w\\s)+\\w$");
+        boolean Right = str[1].matches("(\\w\\s)+\\w$");
+        if ((yourInput.length() + 1) % 2 != 0 || str.length == 0 || !isRight || !Right) {
+            return JSON.toJSONString("error");
+        }
+        TreeNode root1 = new TreeNode(str1[0]);
+        TreeNode root2 = new TreeNode(str2[0]);
+        List<String> list1 = new ArrayList<String>();
+        List<String> list2 = new ArrayList<String>();
+        for (int i = 1; i < str1.length; i++) {
+            list1.add(str1[i]);
+        }
+        TreeNode head1 = createTree(root1, list1);
+        for (int i = 1; i < str2.length; i++) {
+            list2.add(str2[i]);
+        }
+        TreeNode head2 = createTree(root2, list2);
+        Boolean flag = offerAlgorithmsService.HasSubtree(head1, head2);
+        return JSON.toJSONString(flag);
+    }
+    
+    /**
+     * 二叉搜索树的后序遍历序列
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("verifySquenceOfBST")
+    @ResponseBody
+    public String VerifySquenceOfBST(String yourInput) {
+        if (!checkInput(yourInput, "((\\d)+\\s)+(\\d+)$")) {
+            return JSON.toJSONString("error");
+        }
+        String[] str = yourInput.split(" ");
+        int[] strs = new int[str.length];
+        for (int i = 0; i < str.length; i++) {
+            strs[i] = Integer.parseInt(str[i]);
+        }
+        return JSON.toJSONString(offerAlgorithmsService.VerifySquenceOfBST(strs));
+    }
+    
+    /**
+     * 字符串的排列
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("permutation")
+    @ResponseBody
+    public String Permutation(String yourInput) {
+        boolean isRight = yourInput.matches("\\w+");
+        if (!isRight || yourInput.length() == 0) {
+            return JSON.toJSONString("error");
+        }
+        List<String> list = offerAlgorithmsService.Permutation(yourInput);
+        return JSON.toJSONString(getStrBySplitList((ArrayList<String>)list));
+    }
+    
+    /**
+     * 用两个栈实现队列
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("pushAndpop")
+    @ResponseBody
+    public String pushAndpop(String yourInput) {
+        if (!checkInput(yourInput, "((\\d)+\\s)+(\\d+)$")) {
+            return JSON.toJSONString("error");
+        }
+        String[] str = yourInput.split(" ");
+        offerAlgorithmsService.clean();
+        for (int i = 0; i < str.length; i++) {
+            offerAlgorithmsService.push(Integer.parseInt(str[i]));
+        }
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < str.length; i++) {
+            sb.append(offerAlgorithmsService.pop() + " ");
+        }
+        return JSON.toJSONString(sb.toString());
+    }
+    
+    /**
+     * 包含min函数的栈
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("min")
+    @ResponseBody
+    public String min(String yourInput) {
+        if (!checkInput(yourInput, "((\\d)+\\s)+(\\d+)$")) {
+            return JSON.toJSONString("error");
+        }
+        String[] str = yourInput.split(" ");
+        offerAlgorithmsService.clean();
+        for (int i = 0; i < str.length; i++) {
+            offerAlgorithmsService.pushs(Integer.parseInt(str[i]));
+        }
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < str.length; i++) {
+            sb.append(offerAlgorithmsService.min() + " ");
+        }
+        return JSON.toJSONString(sb.toString());
+    }
+    
+    /**
+     * 旋转数组的最小数字
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("minNumberInRotateArray")
+    @ResponseBody
+    public String minNumberInRotateArray(String yourInput) {
+        boolean isRight = yourInput.matches("((\\d)+\\s)+(\\d+)$");
+        String[] str = yourInput.split(" ");
+        int[] strs = new int[str.length];
+        for (int i = 0; i < str.length; i++) {
+            strs[i] = Integer.parseInt(str[i]);
+        }
+        if (!isRight || !isminNumberInRotateArray(strs)) {
+            return JSON.toJSONString("error");
+        }
+        return JSON.toJSONString(offerAlgorithmsService.minNumberInRotateArray(strs));
+    }
+    
+    /**
+     * 丑数
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("getUglyNumber_Solution")
+    @ResponseBody
+    public String GetUglyNumber_Solution(String yourInput) {
+        int n = Integer.parseInt(yourInput);
+        if (!checkInput(yourInput, "(\\d)+")) {
+            return JSON.toJSONString("error");
+        }
+        return JSON.toJSONString(offerAlgorithmsService.GetUglyNumber_Solution(n));
+    }
+    
+    /**
+     * 二维数组中的查找
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("Find")
+    @ResponseBody
+    public String Find(String yourInput) {
+        String[] str = yourInput.split(",");
+        int[][] s = new int[str.length - 1][str[0].length() - 1];
+        for (int j = 0; j < str.length - 1; j++) {
+            String[] strs = str[j].split(" ");
+            for (int i = 0; i < str[j].length() - 1; i++) {
+                s[j][i] = Integer.parseInt(strs[i]);
+            }
+        }
+        if (!IsFind(s)) {
+            return JSON.toJSONString("error");
+        }
+        return JSON.toJSONString(offerAlgorithmsService.Find(Integer.parseInt(str[str.length - 1]), s));
+    }
+    
+    /**
+     * 斐波那契数列
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("fibonacci")
+    @ResponseBody
+    public String Fibonacci(String yourInput) {
+        int n = Integer.parseInt(yourInput);
+        if (!checkInput(yourInput, "(\\d)+")) {
+            return JSON.toJSONString("error");
+        }
+        return JSON.toJSONString(offerAlgorithmsService.Fibonacci(n));
+    }
+    
+    /**
+     * 跳台阶
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("jumpFloor")
+    @ResponseBody
+    public String JumpFloor(String yourInput) {
+        int n = Integer.parseInt(yourInput);
+        if (!checkInput(yourInput, "(\\d)+")) {
+            return JSON.toJSONString("error");
+        }
+        return JSON.toJSONString(offerAlgorithmsService.JumpFloor(n + 1));
+    }
+    
+    /**
+     * 变态跳台阶
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("jumpFloorII")
+    @ResponseBody
+    public String JumpFloorII(String yourInput) {
+        int n = Integer.parseInt(yourInput);
+        if (!checkInput(yourInput, "(\\d)+")) {
+            return JSON.toJSONString("error");
+        }
+        return JSON.toJSONString(offerAlgorithmsService.JumpFloorII(n));
+    }
+    
+    /**
+     * 矩形覆盖
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("rectCover")
+    @ResponseBody
+    public String RectCover(String yourInput) {
+        int n = Integer.parseInt(yourInput);
+        if (!checkInput(yourInput, "(\\d)+")) {
+            return JSON.toJSONString("error");
+        }
+        return JSON.toJSONString(offerAlgorithmsService.RectCover(n));
+    }
+    
+    /**
+     * 翻转单词顺序列
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("reverseSentence")
+    @ResponseBody
+    public String ReverseSentence(String yourInput) {
+        if (!checkInput(yourInput, "((\\w)+\\s)+(\\w+)$")) {
+            return JSON.toJSONString("error");
+        }
+        return JSON.toJSONString(offerAlgorithmsService.ReverseSentence(yourInput));
+    }
+    
+    /**
+     * 扑克牌顺子
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("isContinuous")
+    @ResponseBody
+    public String isContinuous(String yourInput) {
+        if (!checkInput(yourInput, "((\\d)+\\s)+(\\d+)$")) {
+            return JSON.toJSONString("error");
+        }
+        String[] str = yourInput.split(" ");
+        int[] count = new int[str.length];
+        for (int i = 0; i < str.length; i++) {
+            count[i] = Integer.parseInt(str[i]);
+        }
+        if (!Continuous(count)) {
+            return JSON.toJSONString("error");
+        }
+        return JSON.toJSONString(offerAlgorithmsService.isContinuous(count));
+        
+    }
+    
+    private boolean Continuous(int[] str) {
+        String strs = "0,1,2,3,4,5,6,7,8,9,10,11,12,13";
+        Arrays.sort(str);
+        int count = 0;
+        for (int i = 0; i < str.length - 1; i++) {
+            if (str[i] == str[i + 1])
+                count++;
+        }
+        if (count > 1) {
+            return false;
+        }
+        for (int j = 0; j < str.length; j++) {
+            if (!strs.contains(String.valueOf(str[j]))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * 不用加减乘除做加法
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("add")
+    @ResponseBody
+    public String Add(String yourInput) {
+        if (!checkInput(yourInput, "(\\d)+\\s(\\d)+$")) {
+            return JSON.toJSONString("error");
+        }
+        String[] str = yourInput.split(" ");
+        return JSON.toJSONString(offerAlgorithmsService.Add(Integer.parseInt(str[0]), Integer.parseInt(str[1])));
+    }
+    
+    /**
+     * 正则表达式匹配
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("matchRegCore")
+    @ResponseBody
+    public String matchRegCore(String yourInput) {
+        if (!checkInput(yourInput, "(\\w)+\\s(.)+$")) {
+            return JSON.toJSONString("error");
+        }
+        String[] str = yourInput.split(" ");
+        return JSON.toJSONString(offerAlgorithmsService.match(str[0].toCharArray(), str[1].toCharArray()));
+    }
+    
+    /**
+     * 和为S的连续正数序列
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("findContinuousSequence")
+    @ResponseBody
+    public String FindContinuousSequence(String yourInput) {
+        if (!checkInput(yourInput, "(\\d)+")) {
+            return JSON.toJSONString("error");
+        }
+        ArrayList<ArrayList<Integer>> list = offerAlgorithmsService.FindContinuousSequence(Integer.parseInt(yourInput));
+        StringBuffer sb = new StringBuffer();
+        for (ArrayList<Integer> a : list) {
+            for (Integer s : a) {
+                sb.append(s + " ");
+            }
+            sb.append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return JSON.toJSONString(sb.toString());
+    }
+    
+    /**
+     * 和为S的连续正数序列
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("findNumbersWithSum")
+    @ResponseBody
+    public String FindNumbersWithSum(String yourInput) {
+        if (!checkInput(yourInput, "((\\d)+\\s)+(\\d+)$")) {
+            return JSON.toJSONString("error");
+        }
+        String[] str = yourInput.split(" ");
+        int[] strs = new int[str.length - 1];
+        for (int i = 0; i < str.length - 1; i++)
+            strs[i] = Integer.parseInt(str[i]);
+        ArrayList<Integer> list =
+            offerAlgorithmsService.FindNumbersWithSum(strs, Integer.parseInt(str[str.length - 1]));
+        StringBuilder sb = new StringBuilder();
+        if (!list.isEmpty()) {
+            for (Integer a : list)
+                sb.append(a + " ");
+        }
+        else {
+            sb.append("不存在");
+        }
+        return JSON.toJSONString(sb.toString());
+    }
+    
+    /**
+     * 数字在排序数组中出现的次数
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("GetNumberOfK")
+    @ResponseBody
+    public String GetNumberOfK(String yourInput) {
+        if (!checkInput(yourInput, "((\\d)+\\s)+(\\d+)$")) {
+            return JSON.toJSONString("error");
+        }
+        
+        String[] str = yourInput.split(" ");
+        int[] strs = new int[str.length - 1];
+        Integer[] s = new Integer[str.length - 1];
+        for (int i = 0; i < strs.length; i++) {
+            strs[i] = Integer.parseInt(str[i]);
+            s[i] = Integer.parseInt(str[i]);
+        }
+        if (!this.compare(s))
+            return JSON.toJSONString("error");
+        Arrays.sort(strs);
+        return JSON.toJSONString(offerAlgorithmsService.GetNumberOfK(strs, Integer.parseInt(str[str.length - 1])));
+        
+    }
+    
+    /**
+     * 表示数值的字符串
+     *
+     * @param yourInput 输入
+     * @return 输出
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/22
+     */
+    @RequestMapping("isNumeric")
+    @ResponseBody
+    public String isNumeric(String yourInput) {
+        if (!checkInput(yourInput, "(.)+$")) {
+            return JSON.toJSONString("error");
+        }
+        return JSON.toJSONString(offerAlgorithmsService.isNumeric(yourInput.toCharArray()));
+    }
+    
+    private boolean compare(Integer[] str) {
+        for (int i = 0; i < str.length - 1; i++) {
+            if (str[i + 1] < str[i])
+                return false;
+        }
+        return true;
+    }
+    
+    private boolean IsFind(int[][] array) {
+        for (int i = 0; i < array.length - 1; i++)
+            for (int j = 0; j < array[0].length - 1; j++) {
+                if (array[i][j] > array[i][j + 1])
+                    return false;
+                if (array[j][i] > array[j + 1][i])
+                    return false;
+            }
+        return true;
+    }
+    
+    private boolean isminNumberInRotateArray(int[] array) {
+        int k = 0;
+        boolean flag = true;
+        for (int i = 1; i < array.length && flag; i++) {
+            if (array[i - 1] > array[i]) {
+                flag = false;
+                k = i;
+            }
+        }
+        if (k != array.length - 1) {
+            for (int j = k; j < array.length - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
     /** 得到二叉树头结点 **/
     private TreeNode<String> getTreeHead(String[] str) {
         TreeNode<String> root = new TreeNode<String>(str[0]);

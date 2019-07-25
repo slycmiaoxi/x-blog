@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import cn.slycmiaoxi.object.ArCompress;
+import cn.slycmiaoxi.object.Compress;
+import cn.slycmiaoxi.object.Decompress;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -164,7 +167,57 @@ public class DataStructServiceImpl implements DataStructService {
         }
         return -1;
     }
-    
+
+    @Override
+    public void mSort(int[] b, int[] a, int i, int j) {
+        int m=0;
+        int[] c=new int[a.length];
+        if(i==j){
+            a[i]=b[i];
+        }else{
+            m=(i+j)/2;
+            mSort(b,c,i,m);
+            mSort(b,c,m+1,j);
+            merge(c,a,i,m,j);
+        }
+    }
+
+    @Override
+    public Compress getCompress() {
+        return new Compress();
+    }
+
+    @Override
+    public ArCompress getArCompress() {
+        return new ArCompress();
+    }
+
+    @Override
+    public Decompress getDecompress() {
+        return new Decompress();
+    }
+
+    private void merge(int[] b,int[] a,int i,int m,int t){
+        int j=0,k=0,l=0;
+        for(j=m+1,k=i;i<=m&&j<=t;k++){
+            if(b[i]<b[j]){
+                a[k]=b[i++];
+            }else{
+                a[k]=b[j++];
+            }
+        }
+        if(i<=m){
+            for(l=0;l<=m-i;l++){
+                a[k+l]=b[i+l];
+            }
+        }
+        if(j<=t){
+            for(l=0;l<=t-j;l++) {
+                a[k + l] = b[j + l];
+            }
+        }
+    }
+
     private int patition(int[] a, int low, int high) {
         int pivor = a[low];
         while (low < high) {

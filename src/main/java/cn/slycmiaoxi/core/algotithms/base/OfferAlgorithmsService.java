@@ -259,4 +259,234 @@ public interface OfferAlgorithmsService {
      * @Date: 2019/6/20
      */
     ArrayList<Integer> maxInWindows(int[] num, int size);
+    
+    /**
+     * 反转链表
+     * 
+     * @param head 头结点
+     * @return 反转后的结点
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    ListNode ReverseList(ListNode head);
+    
+    /**
+     * 树的子结构
+     * 
+     * @param root1 原树
+     * @param root2 子树
+     * @return 是否是子结构
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    boolean HasSubtree(TreeNode<String> root1, TreeNode<String> root2);
+    
+    /**
+     * 二叉搜索树的后序遍历序列
+     * 
+     * @param sequence 数组
+     * @return 是否是二叉搜索树的后序遍历序列
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    boolean VerifySquenceOfBST(int[] sequence);
+    
+    /**
+     * 字符串的排列
+     * 
+     * @param str 输入
+     * @return 结果
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    ArrayList<String> Permutation(String str);
+    
+    /**
+     *
+     * @param node 输入
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    void push(int node);
+    
+    /**
+     *
+     * @param node 输入
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    void pushs(int node);
+    
+    /**
+     * 用两个栈实现队列
+     * 
+     * @return 结果
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    int pop();
+    
+    /**
+     * 包含min函数的栈
+     * 
+     * @return 结果
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    int min();
+    
+    /**
+     * 旋转数组的最小数字
+     * 
+     * @param array 输入
+     * @return 最小数字
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    int minNumberInRotateArray(int[] array);
+    
+    /**
+     * 丑数
+     * 
+     * @param index 输入
+     * @return 结果
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    int GetUglyNumber_Solution(int index);
+    
+    /**
+     * 二维数组中的查找
+     * 
+     * @param target 目标数值
+     * @param array 原数组
+     * @return 是否存在该数组中
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    boolean Find(int target, int[][] array);
+    
+    /**
+     * 斐波那契数列
+     * 
+     * @param n 输入
+     * @return 结果
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    int Fibonacci(int n);
+    
+    /**
+     * 跳台阶
+     * 
+     * @param target 输入
+     * @return 结果
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    int JumpFloor(int target);
+    
+    /**
+     * 变态跳台阶
+     *
+     * @param target 输入
+     * @return 结果
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    int JumpFloorII(int target);
+    
+    /**
+     * 矩形覆盖
+     *
+     * @param target 输入
+     * @return 结果
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    int RectCover(int target);
+    
+    /**
+     * 翻转单词顺序列
+     * 
+     * @param str 输入的单词
+     * @return 反转后的单词
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    String ReverseSentence(String str);
+    
+    /**
+     * 扑克牌顺子
+     * 
+     * @param numbers 输入
+     * @return 是否是扑克牌顺子
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    boolean isContinuous(int[] numbers);
+    
+    /**
+     * 不用加减乘除做加法
+     * 
+     * @param num1 第一个加数
+     * @param num2 第二个加数
+     * @return 加数
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    int Add(int num1, int num2);
+    
+    /**
+     * 正则表达式匹配
+     * 
+     * @param str
+     * @param pattern
+     * @return
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    boolean match(char[] str, char[] pattern);
+    
+    /**
+     * 和为S的连续正数序列
+     * 
+     * @param sum 输入
+     * @return 结果
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    ArrayList<ArrayList<Integer>> FindContinuousSequence(int sum);
+    
+    /**
+     * 和为S的两个数字
+     * 
+     * @param array
+     * @param sum
+     * @return
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    ArrayList<Integer> FindNumbersWithSum(int[] array, int sum);
+    
+    /**
+     * 数字在排序数组中出现的次数
+     * 
+     * @param array
+     * @param k
+     * @return
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    int GetNumberOfK(int[] array, int k);
+    
+    /**
+     * 表示数值的字符串
+     * 
+     * @param str
+     * @return
+     * @Auther: slycmiaoxi
+     * @Date: 2019/6/20
+     */
+    boolean isNumeric(char[] str);
 }
